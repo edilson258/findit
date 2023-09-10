@@ -1,0 +1,1 @@
+char* fileToBuffer(char** filePath);
