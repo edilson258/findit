@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char* fileToBuffer(char** filePath) {
+char* file_to_buffer(char** file_path) {
   char* buffer = NULL;
   FILE* fp = NULL;
   long contentSize = 0;
 
-  fp = fopen(*filePath, "r");
+  fp = fopen(*file_path, "r");
 
   if(fp == NULL) {
     perror("Failed to open file");
