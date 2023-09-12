@@ -1,8 +1,8 @@
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "include/findit.h"
 #include "include/lexer.h"
 
 TokenList* init_token(char** token) {
@@ -44,7 +44,7 @@ void tokenizer(char* buffer, TokenList** root) {
       int token_cursor = 0;
 
       for (int i = token_start; i < buf_cursor; ++i) {
-        token[token_cursor] = buffer[i];
+        token[token_cursor] = tolower(buffer[i]);
         token_cursor++;
       }
       token[token_cursor] = '\0';

@@ -1,7 +1,9 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "include/lexer.h"
+#include "include/findit.h"
 
 char* append_dot(char* buffer) {
   int buffer_len = strlen(buffer);
@@ -19,6 +21,15 @@ void display_raw_tokens(TokenList** root) {
 
   while (tmp != NULL) {
     printf("%s\n", tmp->token);
+    tmp = tmp->next;
+  }
+}
+
+void display_file_term_freq(FileTermFrequency** root) {
+  TermFrequency* tmp = (*root)->term_frequency;
+
+  while (tmp != NULL) {
+    printf("%s => %d\n", tmp->term, tmp->frequency);
     tmp = tmp->next;
   }
 }

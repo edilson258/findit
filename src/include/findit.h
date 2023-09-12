@@ -7,13 +7,22 @@ typedef struct TermFrequency {
   struct TermFrequency* next;
 } TermFrequency;
 
-typedef struct {
+typedef struct FileTermFrequency {
   char* file_path;
-  TermFrequency* term_frequencies;
-} FileTermFrequencies;
+  float doc_rank;
+  TermFrequency* term_frequency;
+  struct FileTermFrequency* next;
+} FileTermFrequency;
+
+typedef struct {
+  char* dir_path;
+  FileTermFrequency* file_term_frequency;
+} DirFileTermFrequency;
 
 TermFrequency* init_term_frequency(char** term);
-FileTermFrequencies* init_file_term_frequencies(char** file_path);
-void add_term_frequency(FileTermFrequencies** file_term_frequencies, char** term);
+FileTermFrequency* init_file_term_frequency(char** file_path);
+DirFileTermFrequency* init_dir_file_term_frequency(char** dir_path);
+void add_term_frequency(FileTermFrequency** file_term_frequency, char** term);
+void add_dir_file_term_frequency(DirFileTermFrequency** dir_file_term_frequency, FileTermFrequency** file_term_frequency);
 
 #endif

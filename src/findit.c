@@ -9,22 +9,31 @@ TermFrequency* init_term_frequency(char** term) {
   return term_frequency;
 }
 
-FileTermFrequencies* init_file_term_frequencies(char** file_path) {
-  FileTermFrequencies* file_term_frequencies;
-  file_term_frequencies = (FileTermFrequencies*)malloc(sizeof(FileTermFrequencies));
-  file_term_frequencies->file_path = *file_path;
-  file_term_frequencies->term_frequencies =  NULL;
-  return file_term_frequencies;
+FileTermFrequency* init_file_term_frequency(char** file_path) {
+  FileTermFrequency* file_term_frequency;
+  file_term_frequency = (FileTermFrequency*)malloc(sizeof(FileTermFrequency));
+  file_term_frequency->file_path = *file_path;
+  file_term_frequency->doc_rank = 0;
+  file_term_frequency->term_frequency = NULL;
+  file_term_frequency->next = NULL;
+  return file_term_frequency;
 }
 
-void add_term_frequency(FileTermFrequencies** file_term_frequencies, char** term) {
-  if((*file_term_frequencies)->term_frequencies == NULL) {
-    (*file_term_frequencies)->term_frequencies = (TermFrequency*)malloc(sizeof(TermFrequency*));
-    (*file_term_frequencies)->term_frequencies = init_term_frequency(term);
+DirFileTermFrequency* init_dir_file_term_frequency(char** dir_path) {
+  DirFileTermFrequency* dir_file_term_frequency = (DirFileTermFrequency*)malloc(sizeof(DirFileTermFrequency));
+  dir_file_term_frequency->dir_path = *dir_path;
+  dir_file_term_frequency->file_term_frequency = NULL;
+  return dir_file_term_frequency;
+}
+
+void add_term_frequency(FileTermFrequency** file_term_frequency, char** term) {
+  if((*file_term_frequency)->term_frequency == NULL) {
+    (*file_term_frequency)->term_frequency = (TermFrequency*)malloc(sizeof(TermFrequency*));
+    (*file_term_frequency)->term_frequency = init_term_frequency(term);
     return;
   }
 
-  TermFrequency* tmp = (*file_term_frequencies)->term_frequencies;
+  TermFrequency* tmp = (*file_term_frequency)->term_frequency;
   while (tmp->next != NULL) {
     if(strcmp(tmp->term, *term) == 0) {
       tmp->frequency += 1;
@@ -34,4 +43,17 @@ void add_term_frequency(FileTermFrequencies** file_term_frequencies, char** term
   }
 
   tmp->next = init_term_frequency(term);
+}
+
+void add_dir_file_term_frequency(DirFileTermFrequency** dir_file_term_frequency, FileTermFrequency** file_term_frequency) {
+  if((*dir_file_term_frequency)->file_term_frequency == NULL) {
+    (*dir_file_term_frequency)->file_term_frequency = *file_term_frequency;
+    return;
+  }
+
+  FileTermFrequency* tmp = (*dir_file_term_frequency)->file_term_frequency;
+  while (tmp->next != NULL) {
+    tmp = tmp->next;
+  }
+  tmp->next = *file_term_frequency;
 }
