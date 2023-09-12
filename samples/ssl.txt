@@ -1,0 +1,17 @@
+In cryptography, a public key certificate, also known as a digital certificate or identity certificate, is an electronic document used to prove the validity of a public key.[1][2] The certificate includes information about the key, information about the identity of its owner (called the subject), and the digital signature of an entity that has verified the certificate's contents (called the issuer). If the signature is valid, and the software examining the certificate trusts the issuer, then it can use that key to communicate securely with the certificate's subject. In email encryption, code signing, and e-signature systems, a certificate's subject is typically a person or organization. However, in Transport Layer Security (TLS) a certificate's subject is typically a computer or other device, though TLS certificates may identify organizations or individuals in addition to their core role in identifying devices. TLS, sometimes called by its older name Secure Sockets Layer (SSL), is notable for being a part of HTTPS, a protocol for securely browsing the web.
+
+In a typical public-key infrastructure (PKI) scheme, the certificate issuer is a certificate authority (CA),[3] usually a company that charges customers a fee to issue certificates for them. By contrast, in a web of trust scheme, individuals sign each other's keys directly, in a format that performs a similar function to a public key certificate. In case of key compromise, a certificate may need to be revoked.
+
+The most common format for public key certificates is defined by X.509. Because X.509 is very general, the format is further constrained by profiles defined for certain use cases, such as Public Key Infrastructure (X.509) as defined in RFC 5280.
+These are some of the most common fields in certificates. Most certificates contain a number of fields not listed here. Note that in terms of a certificate's X.509 representation, a certificate is not "flat" but contains these fields nested in various structures within the certificate.
+
+Serial Number: Used to uniquely identify the certificate within a CA's systems. In particular this is used to track revocation information.
+Subject: The entity a certificate belongs to: a machine, an individual, or an organization.
+Issuer: The entity that verified the information and signed the certificate.
+Not Before: The earliest time and date on which the certificate is valid. Usually set to a few hours or days prior to the moment the certificate was issued, to avoid clock skew problems.
+Not After: The time and date past which the certificate is no longer valid.
+Key Usage: The valid cryptographic uses of the certificate's public key. Common values include digital signature validation, key encipherment, and certificate signing.
+Extended Key Usage: The applications in which the certificate may be used. Common values include TLS server authentication, email protection, and code signing.
+Public Key: A public key belonging to the certificate subject.
+Signature Algorithm: This contain a hashing algorithm and a digital signature algorithm. For example "sha256RSA" where sha256 is the hashing algorithm and RSA is the signature algorithm.
+Signature: The body of the certificate is hashed (hashing algorithm in "Signature Algorithm" field is used) and then the hash is signed (signature algorithm in the "Signature Algorithm" field is used) with the issuer's private key.

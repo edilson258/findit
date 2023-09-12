@@ -8,6 +8,6 @@ typedef struct DirEntry {
 
 char* file_to_buffer(char** file_path);
 DirEntry* init_dir_entry(char* file_path);
-void scan_dir(char* dir_path, DirEntry** dir_entry);
+void scan_dir(char** dir_path, DirEntry** dir_entry);
 
 #endif

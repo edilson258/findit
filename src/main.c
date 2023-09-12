@@ -1,46 +1,19 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
-#include "include/file-system.h"
-#include "include/findit.h"
-#include "include/utils.h"
-#include "include/lexer.h"
+#include "include/index.h"
+#include "include/search.h"
 
 int main(void) {
-
   char* dir_path = "samples";
-  DirEntry* dir_entries = NULL;
+  DirFileTermFrequency* dir_file_term_frequency = index_dir(&dir_path);
 
-  scan_dir(dir_path, &dir_entries);
-  DirFileTermFrequency* dftf = init_dir_file_term_frequency(&dir_path);
+  char* q = "cpu";
+  SearchOutput* result = search(&dir_file_term_frequency, &q);
 
-  while (dir_entries != NULL) {
-    char* buffer = file_to_buffer(&dir_entries->path);
-
-    TokenList* root = NULL;
-    tokenizer(buffer, &root);
-
-    free(buffer);
-
-    FileTermFrequency* ftf = init_file_term_frequency(&dir_entries->path);
-
-    TokenList* tmp = root;
-    while (tmp != NULL) {
-      add_term_frequency(&ftf, &tmp->token);
-      tmp = tmp->next;
-    }
-
-    add_dir_file_term_frequency(&dftf, &ftf);
-
-    dir_entries = dir_entries->next;
+  while (result != NULL) {
+    printf("%s => %f\n", result->path, result->rank);
+    result = result->next;
   }
 
-  FileTermFrequency* tmp = dftf->file_term_frequency;
-
-  while (tmp != NULL) {
-    display_file_term_freq(&tmp);
-    tmp = tmp->next;
-  }
   return 0;
 }

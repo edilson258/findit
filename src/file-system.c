@@ -61,8 +61,8 @@ void add_dir_entry(DirEntry** dir_entry, char* file_path) {
   tmp->next = init_dir_entry(file_path);
 }
 
-void scan_dir(char* dir_path, DirEntry** dir_entry) {
-  DIR* dp = opendir(dir_path);
+void scan_dir(char** dir_path, DirEntry** dir_entry) {
+  DIR* dp = opendir(*dir_path);
   if(dp == NULL) {
     perror("Failed to open dir");
   }
@@ -70,14 +70,14 @@ void scan_dir(char* dir_path, DirEntry** dir_entry) {
 
   while((entry = readdir(dp))) {
     if(entry->d_type == DT_REG) {
-      char* file_path = join_paths(dir_path, entry->d_name);
+      char* file_path = join_paths(*dir_path, entry->d_name);
       add_dir_entry(dir_entry, file_path);
     } else if (entry->d_type == DT_DIR) {
       if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) {
         continue;
       }
-      char* entry_dir_path = join_paths(dir_path, entry->d_name);
-      scan_dir(entry_dir_path, dir_entry);
+      char* entry_dir_path = join_paths(*dir_path, entry->d_name);
+      scan_dir(&entry_dir_path, dir_entry);
     }
   }
 }

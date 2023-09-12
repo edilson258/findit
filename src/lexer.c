@@ -24,7 +24,6 @@ void add_token2list(TokenList** root, char** token) {
   tmp->next = init_token(token);
 }
 
-
 void tokenizer(char* buffer, TokenList** root) {
   int buf_cursor = 0;
   int token_start = 0;

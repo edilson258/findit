@@ -5,7 +5,7 @@
 TermFrequency* init_term_frequency(char** term) {
   TermFrequency* term_frequency = (TermFrequency*)malloc(sizeof(TermFrequency));
   term_frequency->term = *term;
-  term_frequency->frequency = 0;
+  term_frequency->frequency = 1;
   return term_frequency;
 }
 
