@@ -1,3 +1,8 @@
-Hello! humm, World
-now.is.good,;done
-okay.eu tou com baba e ai? good a.
+While IPv6 hasn't exactly taken the world by storm, it gets significant use in some (usually Asian) countries and most modern operating systems support it. To use Nmap with IPv6, both the source and target of your scan must be configured for IPv6. If your ISP (like most of them) does not allocate IPv6 addresses to you, free tunnel brokers are widely available and work fine with Nmap.
+One of my highest Nmap development priorities has always been performance. A default scan (nmap <hostname>) of a host on my local network takes a fifth of a second. That is barely enough time to blink, but adds up when you are scanning hundreds or thousands of hosts. Moreover, certain scan options such as UDP scanning and version detection can increase scan times substantially. So can certain firewall configurations, particularly response rate limiting. While Nmap utilizes parallelism and many advanced algorithms to accelerate these scans, the user has ultimate control over how Nmap runs. Expert users carefully craft Nmap commands to obtain only the information they care about while meeting their time constraints.
+
+Techniques for improving scan times include omitting non-critical tests, and upgrading to the latest version of Nmap (performance enhancements are made frequently). Optimizing timing parameters can also make a substantial difference. Those options are listed below.
+
+Some options accept a time parameter. This is specified in seconds by default, though you can append ‘ms’, ‘s’, ‘m’, or ‘h’ to the value to specify milliseconds, seconds, minutes, or hours. So the --host-timeout arguments 900000ms, 900, 900s, and 15m all do the same thing.
+
+--min-hostgroup <numhosts>; --max-hostgroup <numhosts> (Adjust parallel scan group sizes)
