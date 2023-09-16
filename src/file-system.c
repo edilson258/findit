@@ -61,6 +61,19 @@ void add_dir_entry(DirEntry** dir_entry, char* file_path) {
   tmp->next = init_dir_entry(file_path);
 }
 
+int is_txt_file(char* file_name) {
+  int str_len = strlen(file_name) - 1;
+  if(
+      file_name[str_len - 3] == '.' &&
+      file_name[str_len - 2] == 't' &&
+      file_name[str_len - 1] == 'x' &&
+      file_name[str_len]     == 't'
+    ) {
+    return 1;
+  }
+  return 0;
+}
+
 void scan_dir(char** dir_path, DirEntry** dir_entry) {
   DIR* dp = opendir(*dir_path);
   if(dp == NULL) {
@@ -69,7 +82,7 @@ void scan_dir(char** dir_path, DirEntry** dir_entry) {
   struct dirent* entry;
 
   while((entry = readdir(dp))) {
-    if(entry->d_type == DT_REG) {
+    if(entry->d_type == DT_REG && is_txt_file(entry->d_name)) {
       char* file_path = join_paths(*dir_path, entry->d_name);
       add_dir_entry(dir_entry, file_path);
     } else if (entry->d_type == DT_DIR) {
