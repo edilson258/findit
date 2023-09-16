@@ -22,6 +22,7 @@ FileTermFrequency* init_file_term_frequency(char** file_path) {
 DirFileTermFrequency* init_dir_file_term_frequency(char** dir_path) {
   DirFileTermFrequency* dir_file_term_frequency = (DirFileTermFrequency*)malloc(sizeof(DirFileTermFrequency));
   dir_file_term_frequency->dir_path = *dir_path;
+  dir_file_term_frequency->docs_amt = 0;
   dir_file_term_frequency->file_term_frequency = NULL;
   return dir_file_term_frequency;
 }

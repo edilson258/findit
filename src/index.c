@@ -27,6 +27,7 @@ DirFileTermFrequency* index_dir(char** dir_path) {
     }
 
     add_dir_file_term_frequency(&dir_file_term_frequency, &file_term_frequency);
+    dir_file_term_frequency->docs_amt += 1;
 
     dir_entry_root = dir_entry_root->next;
   }

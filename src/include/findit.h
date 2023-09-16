@@ -16,6 +16,7 @@ typedef struct FileTermFrequency {
 
 typedef struct {
   char* dir_path;
+  int docs_amt;
   FileTermFrequency* file_term_frequency;
 } DirFileTermFrequency;
 
