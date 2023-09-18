@@ -1,6 +1,6 @@
 # Compiler and flags
 CC = clang
-CFLAGS = -lm #-Wall -Werror -Wall -Wextra -pedantic -g
+CFLAGS = -Wall -Werror -Wall -Wextra -pedantic -g
 
 # Directories
 SRC_DIR = src
@@ -17,7 +17,7 @@ TARGET = findit
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^ -lm
 
 $(LIB_DIR)/%.o: $(SRC_DIR)/%.c | $(LIB_DIR)
 	$(CC) $(CFLAGS) -c -o $@ $<
