@@ -9,7 +9,7 @@ typedef struct TermFrequency {
 
 typedef struct FileTermFrequency {
   char* file_path;
-  float doc_rank;
+  double doc_rank;
   TermFrequency* term_frequency;
   struct FileTermFrequency* next;
 } FileTermFrequency;

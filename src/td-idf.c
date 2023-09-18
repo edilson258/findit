@@ -17,9 +17,12 @@ double tf(char* t, FileTermFrequency* d) {
     tmp = tmp->next;
   }
 
+  if(curr_term_frequency <= 0) return 0;
+
   return curr_term_frequency / all_terms_frequencies;
 }
 
 double idf(int docs_amt, int docs_with_term) {
+  if(docs_with_term <= 0) return 0;
   return log((double)docs_amt / docs_with_term);
 }

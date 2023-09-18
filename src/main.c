@@ -18,7 +18,6 @@ void search(char* query, DirFileTermFrequency* dir_file_term_frequency) {
     while (tokens_tmp != NULL) {
       int docs_with_term = calc_docs_with_term(dir_file_term_frequency, tokens_tmp->token);
       files->doc_rank += tf(tokens_tmp->token, files) * idf(dir_file_term_frequency->docs_amt, docs_with_term);
-      printf("Rank of %s is %f\n", files->file_path, files->doc_rank);
       tokens_tmp = tokens_tmp->next;
     }
     files = files->next;
