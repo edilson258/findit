@@ -8,7 +8,7 @@
 char* file_to_buffer(char** file_path) {
   char* buffer = NULL;
   FILE* fp = NULL;
-  long contentSize = 0;
+  long buf_size = 0;
 
   fp = fopen(*file_path, "r");
 
@@ -17,12 +17,12 @@ char* file_to_buffer(char** file_path) {
   }
 
   fseek(fp, 0, SEEK_END);
-  contentSize = ftell(fp);
+  buf_size = ftell(fp);
   fseek(fp, 0, SEEK_SET);
 
-  buffer = malloc(sizeof(char) * (contentSize));
-  fread(buffer, sizeof(char), contentSize - 1, fp);
-  buffer[contentSize] = '\0';
+  buffer = malloc(sizeof(char) * (buf_size));
+  fread(buffer, sizeof(char), buf_size - 1, fp);
+  buffer[buf_size] = '\0';
 
   fclose(fp);
   return buffer;
@@ -32,13 +32,13 @@ char* join_paths(char* dir_path, char* file_name) {
   int dir_path_len = strlen(dir_path);
   int file_name_len = strlen(file_name);
 
-  char* file_path = (char*)malloc(sizeof(char) * (dir_path_len + file_name_len + 2));
+  char* full_path = (char*)malloc(sizeof(char) * (dir_path_len + file_name_len + 2));
 
-  strcpy(file_path, dir_path);
-  strcat(file_path, "/");
-  strcat(file_path, file_name);
+  strcpy(full_path, dir_path);
+  strcat(full_path, "/");
+  strcat(full_path, file_name);
 
-  return file_path;
+  return full_path;
 }
 
 DirEntry* init_dir_entry(char* file_path) {

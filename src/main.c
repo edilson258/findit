@@ -9,7 +9,7 @@
 
 void search(char* query, DirFileTermFrequency* dir_file_term_frequency) {
   TokenList* query_tokens;
-  tokenizer(append_dot(query), &query_tokens);
+  tokenizer(query, &query_tokens);
 
   FileTermFrequency* files = dir_file_term_frequency->file_term_frequency;
 

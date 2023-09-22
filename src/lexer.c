@@ -56,4 +56,16 @@ void tokenizer(char* buffer, TokenList** root) {
     }
     buf_cursor++;
   }
+  // adding the last token
+  int last_token_len = buf_cursor - token_start;
+  if(last_token_len <= 0) return;
+  char* last_token = malloc(sizeof(char) * (last_token_len + 1));
+  int token_cursor = 0;
+
+  for (int i = token_start; i < buf_cursor; ++i) {
+    last_token[token_cursor] = tolower(buffer[i]);
+    token_cursor++;
+  }
+  last_token[token_cursor] = '\0';
+  add_token2list(root, &last_token);
 }
