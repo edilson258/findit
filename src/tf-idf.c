@@ -1,5 +1,6 @@
 #include <math.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "include/findit.h"
 
