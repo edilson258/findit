@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "include/findit.h"
 #include "include/file-system.h"
